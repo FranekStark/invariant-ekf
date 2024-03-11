@@ -51,6 +51,8 @@ InEKF::InEKF(RobotState state) : g_((Eigen::VectorXd(3) << 0,0,-9.81).finished()
 // Constructor with initial state and noise params
 InEKF::InEKF(RobotState state, NoiseParams params) : g_((Eigen::VectorXd(3) << 0,0,-9.81).finished()), state_(state), noise_params_(params) {}
 
+InEKF::InEKF(RobotState state, NoiseParams params, Eigen::Vector3d gravity) : g_(gravity), state_(state), noise_params_(params) {}
+
 // Return robot's current state
 RobotState InEKF::getState() { 
     return state_; 

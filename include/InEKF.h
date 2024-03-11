@@ -78,6 +78,7 @@ class InEKF {
         InEKF(NoiseParams params);
         InEKF(RobotState state);
         InEKF(RobotState state, NoiseParams params);
+	InEKF(RobotState state, NoiseParams params, Eigen::Vector3d gravity);	
 
         RobotState getState();
         NoiseParams getNoiseParams();
