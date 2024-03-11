@@ -29,7 +29,6 @@ namespace inekf {
 
 class Kinematics {
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         Kinematics(int id_in, Eigen::Matrix4d pose_in, Eigen::Matrix<double,6,6> covariance_in) : id(id_in), pose(pose_in), covariance(covariance_in) { }
 
         int id;
@@ -39,7 +38,6 @@ class Kinematics {
 
 class Landmark {
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         Landmark(int id_in, Eigen::Vector3d position_in) : id(id_in), position(position_in) { }
 
         int id;
@@ -56,7 +54,6 @@ typedef std::vector<Kinematics, Eigen::aligned_allocator<Kinematics> >::const_it
 class Observation {
 
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         Observation(Eigen::VectorXd& Y, Eigen::VectorXd& b, Eigen::MatrixXd& H, Eigen::MatrixXd& N, Eigen::MatrixXd& PI);
         bool empty();
 
@@ -73,7 +70,6 @@ class Observation {
 class InEKF {
     
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         InEKF();
         InEKF(NoiseParams params);
         InEKF(RobotState state);
