@@ -31,7 +31,7 @@ enum ErrorType {LeftInvariant, RightInvariant};
 class InEKF {
     
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
+
 
     /// @name Constructors
     /// @{

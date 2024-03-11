@@ -23,7 +23,6 @@ enum StateType {WorldCentric, BodyCentric};
 class RobotState {
 
     public:
-        EIGEN_MAKE_ALIGNED_OPERATOR_NEW
         RobotState();
         RobotState(const Eigen::MatrixXd& X);
         RobotState(const Eigen::MatrixXd& X, const Eigen::VectorXd& Theta);
