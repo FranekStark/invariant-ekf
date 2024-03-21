@@ -3,21 +3,32 @@ cmake_minimum_required(VERSION 2.8.3)
 # Project's name
 project(inekf)
 
-option(USE_CPP11 "Use flag -std=c++11" ON)
+option(USE_CPP17 "Use flag -std=c++17" ON)
 option(USE_MUTEX "Use mutex in code" OFF)
 
-message("USE_CPP11: " ${USE_CPP11})
+message("USE_CPP17: " ${USE_CPP17})
+message("USE_MUTEX: " ${USE_MUTEX})
 
+if (USE_MUTEX AND NOT USE_CPP17)
+message("test")
+    message(FATAL_ERROR "You cannot have USE_CPP17 = OFF AND USE_MUTEX = ON")
+endif (USE_MUTEX AND NOT USE_CPP17)
 
 # Set compiler flags
-if (USE_CPP11)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
-endif(USE_CPP11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -DEIGEN_NO_DEBUG -march=native -Wl,--no-as-needed")
+if (USE_CPP17)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
+endif(USE_CPP17)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -Wl,--no-as-needed")
+set(CMAKE_BUILD_TYPE Release)
+if (USE_MUTEX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DINEKF_USE_MUTEX=true")
+else (USE_MUTEX)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DINEKF_USE_MUTEX=false")
+endif(USE_MUTEX)
 SET(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 message("CMAKE_CXX_FLAGS: " ${CMAKE_CXX_FLAGS})
-unset(USE_CPP11)
+unset(USE_CPP17)
 unset(USE_MUTEX)
 
 # Set the output folder where your program will be created  
@@ -123,3 +134,17 @@ message("PROJECT_BINARY_DIR: " ${PROJECT_BINARY_DIR})
 # install(FILES
 #   "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/inekfConfig.cmake"
 #   DESTINATION share/inekf/cmake COMPONENT dev)
+
+ install(     
+ DIRECTORY include     
+ DESTINATION include     
+ )     
+     
+ install(     
+   TARGETS inekf     
+   EXPORT inekf     
+   LIBRARY DESTINATION lib     
+   ARCHIVE DESTINATION lib     
+   RUNTIME DESTINATION bin     
+   INCLUDES DESTINATION include     
+ )
