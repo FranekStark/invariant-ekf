@@ -67,6 +67,7 @@ the default.
          */       
         InEKF(RobotState state, NoiseParams params, ErrorType error_type);
     /// @}
+	InEKF(RobotState state, NoiseParams params, Eigen::Vector3d gravity);	
 
     
     /// @name Getters

@@ -64,6 +64,8 @@ void InEKF::clear() {
 // Returns the robot's current error type
 ErrorType InEKF::getErrorType() const { return error_type_; }
 
+InEKF::InEKF(RobotState state, NoiseParams params, Eigen::Vector3d gravity) : g_(gravity), state_(state), noise_params_(params) {}
+
 // Return robot's current state
 RobotState InEKF::getState() const { return state_; }
 
